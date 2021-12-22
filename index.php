@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Calendar</title>
+  <title >Calendar</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,7 +31,7 @@
     selectHelper:true,
     select: function(start, end, allDay)
     {
-     var title = prompt("Enter Event Title");
+     var title = prompt("Ajouter un rendez-vous");
      if(title)
      {
       var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
@@ -43,7 +43,7 @@
        success:function()
        {
         calendar.fullCalendar('refetchEvents');
-        alert("Added Successfully");
+        alert("Le rendez-vous est ajouté avec succès");
        }
       })
      }
@@ -79,14 +79,14 @@
       success:function()
       {
        calendar.fullCalendar('refetchEvents');
-       alert("Event Updated");
+       alert("Rendez-vous modifié");
       }
      });
     },
 
     eventClick:function(event)
     {
-     if(confirm("Are you sure you want to remove it?"))
+     if(confirm("Voulez-vous vraiment supprimer ce rendez-vous?"))
      {
       var id = event.id;
       $.ajax({
@@ -107,10 +107,49 @@
    
   </script>
  </head>
+ <style>
+   @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Roboto+Mono:ital,wght@1,100&display=swap');
+
+     #titre {
+         color: #6A5ACD;
+         font-family: cursive;
+    
+    }
+    h2{font-family: Arial
+    }
+    #calendar {
+        background-color: #E0FFFF;
+    }
+    .fc-month-button { }
+    .fc-state-active {
+  background-color: #48D1CC;
+}
+.fc-content{
+  background-color: #7FFFD4;
+}
+.login h1 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 2.9rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.login h1 span {
+  height: 40px;
+  width: 50px;
+}
+.login h1 span img {
+  height: 100%;
+  width: 50px;
+  transform: translateX(5px) translateY(10px);
+}
+ </style>
  <body>
   <br />
-  <h2 align="center"><p >Calendar</p></h2>
+  <h1 align="center">Med <span><img src="logo.svg" alt=" "></span>ica</h1>
+  
   <br />
+  <br><br>
   <div class="container">
    <div id="calendar"></div>
   </div>
