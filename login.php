@@ -149,7 +149,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if (error) {
             error.parentNode.removeChild(error);
         }
-    }, 5000)
+    }, 3000)
     </script>
 </body>
 
