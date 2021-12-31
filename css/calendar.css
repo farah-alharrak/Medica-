@@ -115,3 +115,7 @@
 .fc-state-default {
   box-shadow: None;
 }
+
+.fc-content {
+  background-color: #0d6efd;
+}

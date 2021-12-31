@@ -1,0 +1,14 @@
+.actions {
+  background: rgba(13, 110, 253, 0.4);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+.tableau {
+  padding: 2rem;
+  opacity: 0.8;
+  background: #fff;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}

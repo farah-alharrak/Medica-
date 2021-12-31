@@ -47,7 +47,7 @@ $(document).ready(function () {
     },
     events: '../rdv/load.php',
     selectable: true,
-    height: document.getElementById('cal').offsetHeight,
+    height: document.getElementById('calendar').offsetHeight,
     selectHelper: true,
     select: function (start, end, allDay) {
       var title = prompt('Enter Event Title')

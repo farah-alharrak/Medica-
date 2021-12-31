@@ -4,7 +4,9 @@
   margin: 0;
   box-sizing: border-box;
 }
-
+body {
+  background-color: rgb(233, 247, 228);
+}
 a {
   text-decoration: none;
 }
@@ -16,6 +18,7 @@ img {
 ul {
   list-style: none;
 }
+
 .main {
   padding: 0.5rem;
   display: flex;
@@ -26,8 +29,9 @@ ul {
   background: #7fffd4;
   height: 100%;
   padding: 2rem;
-  border-radius: 15px 0px 15px 15px;
+  border-radius: 15px 0px 0px 15px;
   position: relative;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
   flex: 3;
 }
 
@@ -41,8 +45,8 @@ ul {
 }
 
 .sidebar .linksMet li a {
-  color: #0d6efd;
-  line-height: 3rem;
+  color: #fff;
+  line-height: 4rem;
   font-size: 1rem;
   font-family: 'Open Sans', sans-serif;
   display: flex;
@@ -56,9 +60,13 @@ ul {
 }
 .sidebar .linksMet li i {
   margin-right: 20px;
+  color: rgb(13, 110, 253);
 }
 .sidebar .linksMet li:hover {
-  background-color: #00ff80;
+  background-color: rgba(13, 110, 253, 0.4);
+}
+.sidebar .linksMet li a:hover {
+  text-decoration: none;
 }
 .sidebar .user-info {
   display: flex;
@@ -70,22 +78,18 @@ ul {
   height: 40px;
   width: 40px;
 }
-
 .main .container {
-  height: 80vh;
+  height: 97.5vh;
+  border-radius: 0 1rem 1rem 0px;
   width: 100%;
-  margin-top: 50px;
-}
-
-.main #calendar {
-  height: 100%;
-  width: 100%;
+  padding-top: 20px;
+  background: url('../img/secretar.png') center center/cover no-repeat;
 }
 
 .sidebar h1 {
   display: flex;
   align-items: center;
-  color: #6495ed;
+  color: rgb(51, 204, 255);
 }
 
 .user-info {
@@ -93,15 +97,26 @@ ul {
   bottom: 0;
   left: 0;
   padding: 20px;
+  color: #fff;
 }
 .user {
   align-self: center;
   text-align: center;
   transform: translateX(-10px);
 }
+.user img {
+  height: 60px;
+  width: 60px;
+}
 .links {
   display: flex;
   justify-content: space-between;
+}
+.links a {
+  color: #fff;
+}
+.links a i {
+  color: rgb(13, 110, 253);
 }
 
 .links i {
