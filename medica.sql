@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 25 déc. 2021 à 01:11
+-- Généré le : dim. 02 jan. 2022 à 20:35
 -- Version du serveur : 10.4.20-MariaDB
 -- Version de PHP : 7.3.29
 
@@ -24,6 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `fichepatient`
+--
+
+CREATE TABLE `fichepatient` (
+  `id` int(11) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `date_naissance` date NOT NULL,
+  `CIN` varchar(50) NOT NULL,
+  `numtelephone` varchar(50) NOT NULL,
+  `assurance` varchar(50) NOT NULL,
+  `sexe` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `adresse` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `fichepatient`
+--
+
+INSERT INTO `fichepatient` (`id`, `nom`, `prenom`, `date_naissance`, `CIN`, `numtelephone`, `assurance`, `sexe`, `email`, `adresse`) VALUES
+(2, 'bammou', 'haytham', '2021-12-08', 'CD269158', '0636651463', 'oui', 'male', 'Haythambm86@gmail.com', 'fes narjiss'),
+(5, 'al harrak', 'farah', '2000-01-08', 'LA163986', '0676645236', 'non', 'male', 'farah@gmail.com', 'larach');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `rdv`
 --
 
@@ -39,8 +66,9 @@ CREATE TABLE `rdv` (
 --
 
 INSERT INTO `rdv` (`id`, `nom_patient`, `date_debut`, `date_fin`) VALUES
-(1, 'test', '2021-12-08 00:00:00', '2021-12-09 00:00:00'),
-(3, 'kika', '2021-11-30 00:00:00', '2021-12-01 00:00:00');
+(1, 'test', '2021-12-23 00:00:00', '2021-12-24 00:00:00'),
+(7, 'haytham', '2022-01-04 00:00:00', '2022-01-05 00:00:00'),
+(8, 'haytham mrid ', '2022-01-10 00:00:00', '2022-01-11 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -68,6 +96,12 @@ INSERT INTO `utilisateur` (`id`, `username`, `password`, `role`) VALUES
 --
 
 --
+-- Index pour la table `fichepatient`
+--
+ALTER TABLE `fichepatient`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `rdv`
 --
 ALTER TABLE `rdv`
@@ -85,10 +119,16 @@ ALTER TABLE `utilisateur`
 --
 
 --
+-- AUTO_INCREMENT pour la table `fichepatient`
+--
+ALTER TABLE `fichepatient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT pour la table `rdv`
 --
 ALTER TABLE `rdv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`

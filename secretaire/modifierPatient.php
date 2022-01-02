@@ -13,6 +13,7 @@
     }
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nom = trim($_POST["nom"]);
+        $id = trim($_POST["id"]);
         $prenom = trim($_POST["prenom"]);
         $date_naissance = trim($_POST["date_naissance"]);
         $CIN = trim($_POST["CIN"]);
@@ -21,21 +22,23 @@
         $sexe = trim($_POST["gender"]);
         $email = trim($_POST["email"]);
         $adresse = trim($_POST["adresse"]);
-        $sql = "UPDATE fichepatient set nom = :nom ,prenom = :prenom, date_naissance=:date_naissance ,CIN = :CIN ,numtelephone = :numtelephone,assurance = :assurance,sexe = :sexe,email = :email WHERE id = :id";
-        $stmt = $connect->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':prenom', $prenom);
-        $stmt->bindParam(':date_naissance', $date_naissance);
-        $stmt->bindParam(':CIN', $CIN);
-        $stmt->bindParam(':numtelephone', $numtelephone);
-        $stmt->bindParam(':assurance', $assurance);
-        $stmt->bindParam(':sexe', $sexe);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':adresse', $adresse);
-
-        if($stmt->execute()){
-            header('location : listepatients.php');  
+        $sql = "UPDATE fichepatient 
+            set nom = :nom , prenom = :prenom , adresse = :adresse , email = :email ,CIN = :CIN , numtelephone = :numtelephone , assurance = :assurance , sexe = :sexe , date_naissance = :date_naissance
+            WHERE id = :id
+            ";
+        $st = $connect->prepare($sql);
+        $st->bindParam('id', $id);
+        $st->bindParam('nom', $nom);
+        $st->bindParam('prenom', $prenom);
+        $st->bindParam('date_naissance', $date_naissance);
+        $st->bindParam('CIN', $CIN);
+        $st->bindParam('numtelephone', $numtelephone);
+        $st->bindParam('assurance', $assurance);
+        $st->bindParam('sexe', $sexe);
+        $st->bindParam('email', $email);
+        $st->bindParam('adresse', $adresse);
+        if($st->execute()){
+            header('location: listepatients.php');  
         } else {
             print_r($connect->errorInfo());
         }
@@ -98,6 +101,7 @@
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                 <h3 class="register-heading">Nouveau Patient</h3>
                                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                                    <input type="hidden" value="<?php echo $id; ?>" name="id" />
                                     <div class="row register-form">
 
                                         <div class="col-md-6">
@@ -138,7 +142,8 @@
                                             </div>
                                             <div class="md-form md-outline input-with-post-icon datepicker form-group">
                                                 <input placeholder="Select date" type="date" id="example"
-                                                    name='date_naissance' class="form-control" required>
+                                                    name='date_naissance' class="form-control"
+                                                    value="<?php echo $resultat['date_naissance']; ?>" required>
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Assurance *"

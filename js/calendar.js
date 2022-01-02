@@ -50,7 +50,7 @@ $(document).ready(function () {
     height: document.getElementById('calendar').offsetHeight,
     selectHelper: true,
     select: function (start, end, allDay) {
-      var title = prompt('Enter Event Title')
+      var title = prompt('entrer le nom du patient')
       if (title) {
         var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss')
         var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss')
@@ -60,7 +60,6 @@ $(document).ready(function () {
           data: { title: title, start: start, end: end },
           success: function () {
             calendar.fullCalendar('refetchEvents')
-            alert('Added Successfully')
           },
         })
       }
