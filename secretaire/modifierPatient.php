@@ -99,7 +99,7 @@
                     <div class="col-md-9 mx-auto register-right">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h3 class="register-heading">Nouveau Patient</h3>
+                                <h3 class="register-heading">Modifier Patient</h3>
                                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                     <input type="hidden" value="<?php echo $id; ?>" name="id" />
                                     <div class="row register-form">
