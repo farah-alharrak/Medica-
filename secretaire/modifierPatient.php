@@ -1,43 +1,17 @@
 <?php
-
-// Initialize the session
-session_start();
-if(!isset($_SESSION["loggedin"]) || $_SESSION["role"] != 'secretaire'){
-    header("location: ../login.php");
-}
-
-/* Database credentials. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'medica');
- 
-/* Attempt to connect to MySQL database */
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
-// Check connection
-if (!$link) {
-    die('Connect Error: ' . mysqli_connect_error());
-}else{
- 
-// Define variables and initialize with empty values
-$nom = $prenom = $date_naissane = $CIN = $numtelephone = $assurance = $sexe = $email = $adresse = "";
-/*$nom_err = $prenom_err = $date_de_naissane_err = $cin_err = $numero_de_telephone_err = $assurance_err = $sexe_err = $email_err = $adresse_err = "";*/
-
-$sql = "INSERT INTO fichepatient (nom,prenom,date_naissance,CIN,numtelephone,assurance,sexe,email,adresse) VALUES (?,?,?,?,?,?,?,?,?)";
-
-// Processing form data when form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $stmt = mysqli_prepare($link, $sql);
-    if(!$stmt) {
-        die('mysqli error: '.mysqli_error($link));
+    session_start();
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["role"] != 'secretaire'){
+        header("location: ../login.php");
     }
-
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssssssss", $nom,$prenom,$date_naissance,$CIN,$numtelephone,$assurance,$sexe,$email,$adress);    
-
-        // Set parameters
+    $connect = new PDO('mysql:host=localhost;dbname=medica', 'root', '');
+    $id = (int) $_GET['id'];
+    $query = "select * FROM fichepatient where id = :id";
+    $stmt = $connect->prepare($query);
+    $stmt->bindParam(':id', $id);
+    if($stmt->execute()){
+        $resultat = $stmt->fetch();  
+    }
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
         $nom = trim($_POST["nom"]);
         $prenom = trim($_POST["prenom"]);
         $date_naissance = trim($_POST["date_naissance"]);
@@ -46,16 +20,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $assurance = trim($_POST["assurance"]);
         $sexe = trim($_POST["gender"]);
         $email = trim($_POST["email"]);
-        $adress = trim($_POST["adresse"]);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        header("Location:listepatients.php");
+        $adresse = trim($_POST["adresse"]);
+        $sql = "UPDATE fichepatient set nom = :nom ,prenom = :prenom, date_naissance=:date_naissance ,CIN = :CIN ,numtelephone = :numtelephone,assurance = :assurance,sexe = :sexe,email = :email WHERE id = :id";
+        $stmt = $connect->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':date_naissance', $date_naissance);
+        $stmt->bindParam(':CIN', $CIN);
+        $stmt->bindParam(':numtelephone', $numtelephone);
+        $stmt->bindParam(':assurance', $assurance);
+        $stmt->bindParam(':sexe', $sexe);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':adresse', $adresse);
 
+        if($stmt->execute()){
+            header('location : listepatients.php');  
+        } else {
+            print_r($connect->errorInfo());
+        }
 
-}
-}
+    }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -117,19 +103,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Nom *" name="nom"
-                                                    required />
+                                                    required value="<?php echo $resultat['nom']; ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="CIN *" name="CIN"
-                                                    required />
+                                                    required value="<?php echo $resultat['CIN']; ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control"
-                                                    placeholder="Numéro de téléphone *" name="numtelephone" required />
+                                                    placeholder="Numéro de téléphone *" name="numtelephone"
+                                                    value="<?php echo $resultat['numtelephone']; ?>" required />
                                             </div>
                                             <div class="form-group">
                                                 <input type="email" class="form-control" placeholder="Email *"
-                                                    name="email" required />
+                                                    name="email" required value="<?php echo $resultat['email']; ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <div class="sexe">
@@ -147,7 +134,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Prénom *"
-                                                    name="prenom" required />
+                                                    name="prenom" required value="<?php echo $resultat['prenom']; ?>" />
                                             </div>
                                             <div class="md-form md-outline input-with-post-icon datepicker form-group">
                                                 <input placeholder="Select date" type="date" id="example"
@@ -155,13 +142,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Assurance *"
-                                                    name="assurance" required />
+                                                    name="assurance" required
+                                                    value="<?php echo $resultat['assurance']; ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="Adresse *"
-                                                    name="adresse" required />
+                                                    name="adresse" required
+                                                    value="<?php echo $resultat['adresse']; ?>" />
                                             </div>
-                                            <input type="submit" class="btnRegister" value="Ajouter" />
+                                            <input type="submit" class="btnRegister" value="Modifier" />
                                         </div>
 
                                     </div>

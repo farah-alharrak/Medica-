@@ -3,6 +3,28 @@ session_start();
 if(!isset($_SESSION["loggedin"]) || $_SESSION["role"] != 'secretaire'){
     header("location: ../login.php");
 }
+$connect = new PDO('mysql:host=localhost;dbname=medica', 'root', '');
+
+$data = array();
+
+$query = "SELECT * FROM fichepatient ORDER BY id";
+
+$statement = $connect->prepare($query);
+
+$statement->execute();
+
+$result = $statement->fetchAll();
+foreach($result as $row)
+{
+ $data[] = array(
+  'id' => $row['id'],
+  'nom'   => $row["nom"],
+  'prenom'   => $row["prenom"],
+  'CIN'   => $row["CIN"],
+  'numtelephone' => $row["numtelephone"]
+ );
+}
+
 
 ?>
 
@@ -58,64 +80,55 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["role"] != 'secretaire'){
             <div class="actions">
                 <div class="search">
                     <i class="fas fa-search"></i>
-                    <input type="text" />
+                    <input type="text" id='filter' />
                 </div>
-                <div class=" ajouter">
+                <div class="ajouter">
+                    <a href="ajouterPatients.php">
+                        <i class="fas fa-user-plus"></i>
+                        Ajouter un Patient
+                    </a>
                 </div>
             </div>
             <div class="tableau">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col"><i class="far fa-user"></i> Nom</th>
+                            <th scope="col"><i class="far fa-user"></i> Prénom</th>
+                            <th scope="col"><i class="fas fa-id-badge"></i> CIN</th>
+                            <th scope="col"><i class="fas fa-phone-square-alt"></i> Numéro de téléphone</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                        <?php foreach ($data as $d): ?>
+
+                        <tr class="info">
+                            <td><?= $d["nom"] ?></td>
+                            <td><?= $d["prenom"] ?></td>
+                            <td><?= $d["CIN"] ?></td>
+                            <td><?= $d["numtelephone"] ?></td>
+                            <td>
+                                <a href="modifierPatient.php?id=<?= $d["id"] ?>">
+                                    <button class="btn btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </a>
+                                <a href="supprimerPatient.php?id=<?= $d["id"] ?>">
+                                    <button class="btn btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
     </div>
+    <script src="../js/filter.js"></script>
 </body>
 
 </html>
