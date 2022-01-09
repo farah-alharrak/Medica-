@@ -43,6 +43,11 @@ foreach($result as $row)
     <link rel="stylesheet" href="../css/template.css">
     <link rel="stylesheet" href="../css/listePatients.css">
     <title>medica | liste des patients</title>
+    <style>
+    .supp {
+        display: inline-block;
+    }
+    </style>
 </head>
 
 <body>
@@ -114,11 +119,13 @@ foreach($result as $row)
                                         <i class="fas fa-edit"></i>
                                     </button>
                                 </a>
-                                <a href="supprimerPatient.php?id=<?= $d["id"] ?>">
-                                    <button class="btn btn-danger">
+                                <form class='supp' action="supprimerPatient.php">
+                                    <input type="hidden" name="id" value="<?= $d["id"] ?>">
+                                    <button class="btn btn-danger" type="submit">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </a>
+                                </form>
+
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -129,6 +136,17 @@ foreach($result as $row)
     </div>
     </div>
     <script src="../js/filter.js"></script>
+    <script>
+    const supps = document.querySelectorAll('.supp')
+    supps.forEach(supp => {
+        supp.addEventListener('submit', e => {
+            e.preventDefault();
+            if (confirm('voulez vous vraiment supprimer ce patient ?')) {
+                e.target.submit()
+            }
+        });
+    })
+    </script>
 </body>
 
 </html>
