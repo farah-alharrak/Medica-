@@ -119,3 +119,8 @@
 .fc-content {
   background-color: #0d6efd;
 }
+
+.fc-bg {
+  opacity: 1 !important;
+  z-index: -1 !important;
+}

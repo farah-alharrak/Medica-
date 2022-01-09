@@ -55,15 +55,22 @@ ul {
 
 .sidebar .linksMet li {
   width: 100%;
-  border-radius: 15px;
   padding: 5px;
+  border-bottom: 1px dotted #777;
+}
+.sidebar .linksMet li:last-child {
+  border-bottom: none;
 }
 .sidebar .linksMet li i {
   margin-right: 20px;
   color: rgb(13, 110, 253);
 }
-.sidebar .linksMet li:hover {
-  background-color: rgba(13, 110, 253, 0.4);
+.sidebar .linksMet li a {
+  transition: all 0.4s ease;
+}
+.sidebar .linksMet li a:hover {
+  /* background-color: rgba(13, 110, 253, 0.4); */
+  transform: translateX(15px);
 }
 .sidebar .linksMet li a:hover {
   text-decoration: none;
