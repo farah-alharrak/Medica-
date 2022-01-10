@@ -70,14 +70,17 @@ $(document).ready(function () {
       var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss')
       var title = event.title
       var id = event.id
-      $.ajax({
-        url: '../rdv/update.php',
-        type: 'POST',
-        data: { title: title, start: start, end: end, id: id },
-        success: function () {
-          calendar.fullCalendar('refetchEvents')
-        },
-      })
+      if (confirm('voulez vous vraiment modifier ce rendez vous ?')) {
+        alert('hahahhah')
+        $.ajax({
+          url: '../rdv/update.php',
+          type: 'POST',
+          data: { title: title, start: start, end: end, id: id },
+          success: function () {
+            calendar.fullCalendar('refetchEvents')
+          },
+        })
+      }
     },
 
     eventDrop: function (event) {
@@ -94,6 +97,8 @@ $(document).ready(function () {
             calendar.fullCalendar('refetchEvents')
           },
         })
+      } else {
+        calendar.fullCalendar('refetchEvents')
       }
     },
 
