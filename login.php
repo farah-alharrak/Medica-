@@ -7,7 +7,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     if($_SESSION["role"] == 'secretaire'){
         header("location:secretaire/acceuil.php");
     } else {
-        header("location:medecin/acceuil.php");
+        header("location:medecin/accueil.php");
     }
     exit;
 }
