@@ -15,7 +15,7 @@
                 <a href="./listepatients.php"><i class="fas fa-list"></i> liste des patients</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-calculator"></i> comptabilite</a>
+                <a href="../comptabilite/compta.php"><i class="fas fa-calculator"></i> comptabilite</a>
             </li>
         </ul>
         <div class="user-info">

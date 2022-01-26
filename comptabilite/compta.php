@@ -1,4 +1,8 @@
 <?php
+    session_start();
+    if(!isset($_SESSION["loggedin"]) || $_SESSION["role"] != 'secretaire'){
+            header("location: ../login.php");
+    }
     $prixConsultation = 300;
     $totale = null;
     if(isset($_POST["calculate"])){
