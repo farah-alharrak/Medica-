@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     width: 100%;
     height: 100%;
     flex: 1;
-    background: url('img/doctor.jpg') center center/cover;
+    background: url('assets/img/doctor.jpg') center center/cover;
     border-radius: 5px;
 }
 
@@ -129,7 +129,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="img-container"></div>
             <div class="login">
                 <div class="container">
-                    <h1>Med<span><img src="img/logo.svg" alt=" "></span>ica</h1>
+                    <h1>Med<span><img src="assets/img/logo.svg" alt=" "></span>ica</h1>
                     <h3>Welcome to <span>Medica</span></h3>
                     <?php 
                         if(!empty($login_err)){

@@ -111,7 +111,6 @@ $(document).ready(function () {
           data: { id: id },
           success: function () {
             calendar.fullCalendar('refetchEvents')
-            alert('Event Removed')
           },
         })
       }

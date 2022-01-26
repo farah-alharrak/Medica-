@@ -40,8 +40,8 @@ foreach($result as $row)
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.css" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="../css/template.css">
-    <link rel="stylesheet" href="../css/listePatients.css">
+    <link rel="stylesheet" href="../assets/css/template.css">
+    <link rel="stylesheet" href="../assets/css/listePatients.css">
     <title>medica | liste des patients</title>
     <style>
     .supp {
@@ -51,88 +51,59 @@ foreach($result as $row)
 </head>
 
 <body>
-    <div class="main">
-        <aside class="sidebar">
-            <h1>
-                Med<span><img src="../img/logo.svg" alt=" " /></span>ica
-            </h1>
-            <ul class='linksMet'>
-                <li>
-                    <a href="/"><i class="fas fa-home"></i> home</a>
-                </li>
-                <li>
-                    <a href="./ajouterPatients.php"><i class="fas fa-user-plus"></i> ajouter patient</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fas fa-list"></i> liste des patients</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fas fa-calculator"></i> comptabilite</a>
-                </li>
-            </ul>
-            <div class="user-info">
-                <div class="user">
-                    <img src="../img/receptionist.png" alt="user" />
-                    <p>secretaire</p>
-                </div>
-                <ul class="links">
-                    <li><a href="../logout.php"><i class="fas fa-sign-out-alt"></i>logout</a></li>
-                    <li><a href="#"><i class="fas fa-key"></i>Reset</a></li>
-                </ul>
+    <?php include '../includes/sidebar.php'; ?>
+    <div class="container">
+        <div class="actions">
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" id='filter' />
             </div>
-        </aside>
-        <div class="container">
-            <div class="actions">
-                <div class="search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id='filter' />
-                </div>
-                <div class="ajouter">
-                    <a href="ajouterPatients.php">
-                        <i class="fas fa-user-plus"></i>
-                        Ajouter un Patient
-                    </a>
-                </div>
-            </div>
-            <div class="tableau">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col"><i class="far fa-user"></i> Nom</th>
-                            <th scope="col"><i class="far fa-user"></i> Prénom</th>
-                            <th scope="col"><i class="fas fa-id-badge"></i> CIN</th>
-                            <th scope="col"><i class="fas fa-phone-square-alt"></i> Numéro de téléphone</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($data as $d): ?>
-
-                        <tr class="info">
-                            <td><?= $d["nom"] ?></td>
-                            <td><?= $d["prenom"] ?></td>
-                            <td><?= $d["CIN"] ?></td>
-                            <td><?= $d["numtelephone"] ?></td>
-                            <td>
-                                <a href="modifierPatient.php?id=<?= $d["id"] ?>">
-                                    <button class="btn btn-primary">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                </a>
-                                <form class='supp' action="supprimerPatient.php">
-                                    <input type="hidden" name="id" value="<?= $d["id"] ?>">
-                                    <button class="btn btn-danger" type="submit">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form>
-
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <div class="ajouter">
+                <a href="ajouterPatients.php">
+                    <i class="fas fa-user-plus"></i>
+                    Ajouter un Patient
+                </a>
             </div>
         </div>
+        <div class="tableau">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"><i class="far fa-user"></i> Nom</th>
+                        <th scope="col"><i class="far fa-user"></i> Prénom</th>
+                        <th scope="col"><i class="fas fa-id-badge"></i> CIN</th>
+                        <th scope="col"><i class="fas fa-phone-square-alt"></i> Numéro de téléphone</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data as $d): ?>
+
+                    <tr class="info">
+                        <td><?= $d["nom"] ?></td>
+                        <td><?= $d["prenom"] ?></td>
+                        <td><?= $d["CIN"] ?></td>
+                        <td><?= $d["numtelephone"] ?></td>
+                        <td>
+                            <a href="modifierPatient.php?id=<?= $d["id"] ?>">
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </a>
+                            <form class='supp' action="supprimerPatient.php">
+                                <input type="hidden" name="id" value="<?= $d["id"] ?>">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
     </div>
     </div>
     <script src="../js/filter.js"></script>
