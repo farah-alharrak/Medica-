@@ -76,7 +76,7 @@ foreach($result as $row)
                     <a href="#"><i class="fal fa-comment-alt-medical"></i> Consultation</a>
                 </li>
                 <li>
-                    <a href="./listepatients.php"><i class="fas fa-list"></i> Calendrier</a>
+                    <a href="calendrier.php"><i class="far fa-calendar"></i> Calendrier</a>
                 </li>
                 
             </ul>
@@ -117,11 +117,12 @@ foreach($result as $row)
                             <td><?= $d["prenom"] ?></td>
                             <td><?= $d["CIN"] ?></td>
                             <td>
-                                <a href="modifierPatient.php?id=<?= $d["id"] ?>">
+                                <a href="dossier.php?CIN=<?= $d["CIN"] ?>">
                                     <button class="btn btn-primary">
                                         Dossier medical
                                     </button>
                                 </a>
+                                
                                 <a href="supprimerPatient.php?id=<?= $d["id"] ?>">
                                     <button class="btn btn-danger">
                                     <i class="fal fa-comment-alt-medical">Consultations</i>
