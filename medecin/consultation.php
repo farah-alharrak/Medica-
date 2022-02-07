@@ -5,15 +5,28 @@
     }
     $connect = new PDO('mysql:host=localhost;dbname=medica', 'root', '');
     $CIN =  $_GET['CIN'];
-    $query = "select * FROM dossier_medical where CIN = :CIN";
+    $query = "select * FROM consultation where CIN = :CIN";
     $stmt = $connect->prepare($query);
     $stmt->bindParam(':CIN', $CIN);
     if($stmt->execute()){
-        $resultat = $stmt->fetch();  
+        $resultat = $stmt->fetchAll();  
         if($resultat == null ){ header("location: acceuil.php");} 
-        
+        foreach($resultat as $row)
+        {
+            $data[] = array(
+                'nom_prenom' => $row['nom_prenom'],
+                'CIN'   => $row["CIN"],
+                'date_consultation'   => $row["date_consultation"],
+                'motif_consultation'   => $row["motif_consultation"],
+                'examen_clinique' => $row["examen_clinique"],
+                'examen_paraclinique' => $row["examen_paraclinique"],
+                'diagnostic' => $row["diagnostic"],
+                'conclusion' => $row["conclusion"],
+                'evolution' => $row["evolution"]
+            );
+        }
     }
-    
+        
     
 
 ?>
@@ -67,42 +80,64 @@
             </div>
         </aside>
         <div class="container">
+        <?php foreach ($data as $d): ?>
             <div class="register">
                 <div class="row">
                     <div class="col-md-9 mx-auto register-right">
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <h3 class="register-heading">Dossier Médical</h3>
+                                <h3 class="register-heading">Consultations </h3>
                                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                                <input type="hidden" value="<?php echo $CIN; ?>" name="CIN" />
+                                <input type="hidden" value="<?php echo $d["CIN"]; ?>" name="CIN" />
                                     <div class="row register-form">
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                             <label for="lname">Nom et Prénom</label><br>
                                                 <input type="text" class="form-control" 
-                                        placeholder="Nom et Prénom *" name="nom_prenom" required value="<?php echo $resultat['nom_prenom']; ?>"/>
+                                        placeholder="Nom et Prénom *" name="nom_prenom" required value="<?php echo $d['nom_prenom']; ?>"/>
                                         
                                             </div>
                                             <div class="form-group">
                                             <label for="lname">CIN</label><br>
-                                                <input type="text" class="form-control" placeholder="CIN *" name="CIN" required value="<?php echo $resultat['CIN']; ?>"/>
+                                                <input type="text" class="form-control" placeholder="CIN *" name="CIN" required value="<?php echo $d['CIN']; ?>"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                         <div class="form-group">
-                                        <label for="lname">Antécédents Personnels</label><br>
+                                        <label for="lname">Motif de consultation</label><br>
                                                 <input type="text" class="form-control" 
-                                                    placeholder="Antécédents Personnels" name="antecedents_personnels" value="<?php echo $resultat['antecedents_personnels']; ?>"/>
+                                                    placeholder="Motif de consultation" name="motif_consultation" value="<?php echo $d['motif_consultation']; ?>"/>
                                             </div>
                                             <div class="form-group">
-                                            <label for="lname">Antécédents Familiaux</label><br>
+                                            <label for="lname">Date de consultation</label><br>
                                                 <input type="text" class="form-control" 
-                                                    placeholder="Antécédents Familiaux" name="antecedents_familiaux" value="<?php echo $resultat['antecedents_familiaux']; ?>"/>
+                                                    placeholder="Date de consultation" name="date_consultation" value="<?php echo $d['date_consultation']; ?>"/>
                                             </div>
                                             <div class="form-group">
+                                            <label for="lname">Examen clinique</label><br>
                                                 <input type="text" class="form-control"
-                                                    placeholder="Histoire de la maladie" name="histoire_maladie" value="<?php echo $resultat['histoire_maladie']; ?>"/>
+                                                    placeholder="Examen clinique" name="examen_clinique" value="<?php echo $d['examen_clinique']; ?>"/>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="lname">Examen paraclinique</label><br>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Examen paraclinique" name="examen_paraclinique" value="<?php echo $d['examen_paraclinique']; ?>"/>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="lname">Diagnostic </label><br>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Diagnostic" name="diagnostic" value="<?php echo $d['diagnostic']; ?>"/>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="lname">Conclusion</label><br>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Conclusion" name="conclusion" value="<?php echo $d['conclusion']; ?>"/>
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="lname">Evolution</label><br>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Evolution" name="evolution" value="<?php echo $d['evolution']; ?>"/>
                                             </div>
                                         </div>
 
@@ -115,6 +150,7 @@
                 </div>
 
             </div>
+            <?php endforeach; ?>
         </div>
     </div>
     </div>

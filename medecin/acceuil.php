@@ -70,7 +70,7 @@ foreach($result as $row)
                     <a href="acceuil.php"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li>
-                    <a href="./ajouterPatients.php"><i class="fas fa-user-plus"></i>Dossier medical</a>
+                    <a href="#"><i class="fas fa-user-plus"></i>Dossier medical</a>
                 </li>
                 <li>
                     <a href="#"><i class="fal fa-comment-alt-medical"></i> Consultation</a>
@@ -123,7 +123,7 @@ foreach($result as $row)
                                     </button>
                                 </a>
                                 
-                                <a href="supprimerPatient.php?id=<?= $d["id"] ?>">
+                                <a href="consultation.php?CIN=<?= $d["CIN"] ?>">
                                     <button class="btn btn-danger">
                                     <i class="fal fa-comment-alt-medical">Consultations</i>
                                     </button>

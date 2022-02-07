@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-    <script src="../js/doctor_calendar.js"></script>
+    <script src="../js/med_calendar.js"></script>
     <style>
     .main #calendar {
         height: 90%;
@@ -42,30 +42,28 @@
 
 <body>
     <div class="main">
-        <aside class="sidebar">
+    <aside class="sidebar">
             <h1>
                 Med<span><img src="../img/logo.svg" alt=" " /></span>ica
             </h1>
             <ul class='linksMet'>
-                    <li>
-                        <a href="acceuil.php"><i class="fas fa-home"></i> Home</a>
-                    </li>
-                    <li>
-                        <a href="./calendar.php"><i class="far fa-calendar"></i> Calendrier</a>
-                    </li>
-                    <li>
-                        <a href="./listepatients.php"><i class="fas fa-list"></i> Liste Patients</a>
-                    </li>
-                    <li>
-                        <a href="./documents/dossier_medical.php"><i class="fas fa-user-plus"></i>Dossier medical</a>
-                    </li>
-                    <li>
-                        <a href="./documents/consultation.php"><i class="fal fa-comment-alt-medical"></i> Consultation</a>
-                    </li>   
+                <li>
+                    <a href="acceuil.php"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-user-plus"></i>Dossier medical</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fal fa-comment-alt-medical"></i> Consultation</a>
+                </li>
+                <li>
+                    <a href="calendrier.php"><i class="far fa-calendar"></i> Calendrier</a>
+                </li>
+                
             </ul>
             <div class="user-info">
                 <div class="user">
-                    <img src="../img/user_doctor.png" alt="user" />
+                    <img src="../img/med.jpg" alt="user" />
                     <p>Medecin</p>
                 </div>
                 <ul class="links">
